@@ -6,10 +6,15 @@ import Messages from './pages/Messages.vue';
 
 <template>
   <Nav/>
-  <h1 class="title">
+  <div class="container">
+    <section class="section">
+       <h1 class="title">
     Praying for Ukraine
   </h1>
   <Messages/>
+    </section>
+  </div>
+ 
 </template>
 
 <style>
