@@ -1,8 +1,10 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
 
 import Home from '../pages/Home.vue'
-import Messages from '../pages/Messages.vue'
+//import Messages from '../pages/Messages.vue'
+import Login from '../pages/Login.vue'
 import Generic from '../pages/Generic.vue'
+import session from "../models/session";
 
 
 // 2. Define some routes
@@ -13,8 +15,8 @@ const routes: RouteRecordRaw[] = [ //made it type RouteRecordRaw
   { path: '/about', component: Generic, props: {title: 'About Page!'} },
   { path: '/contact', component: Generic, props: {title: 'Contact Page!'} },
   { path: '/signup', component: Generic, props: {title: 'Sign up Page!'} },
-  { path: '/login', component: Generic, props: {title: 'Log in Page!'} },
-  { path: '/messages', component: Messages },
+  { path: '/login', component: Login },
+  { path: '/messages', component: () => import('../pages/Messages.vue') },
 ]
 
 // 3. Create the router instance and pass the `routes` option
@@ -25,6 +27,15 @@ const router = createRouter({
   history: createWebHistory(),
   routes, // short for `routes: routes`
   linkActiveClass: 'is-active'
+})
+
+//Guards:
+router.beforeEach((to, from) =>{
+  if (['/messages'].includes(to.path)){ //list of paths that require logins
+    if (!session.user){
+      return '/login'
+    }
+  }
 })
 
 export default router;
