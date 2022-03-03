@@ -2,6 +2,7 @@ import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
 
 import Home from '../pages/Home.vue'
 import Messages from '../pages/Messages.vue'
+import Generic from '../pages/Generic.vue'
 
 
 // 2. Define some routes
@@ -9,7 +10,10 @@ import Messages from '../pages/Messages.vue'
 // We'll talk about nested routes later.
 const routes: RouteRecordRaw[] = [ //made it type RouteRecordRaw
   { path: '/', component: Home },
-  //{ path: '/about', component: About },
+  { path: '/about', component: Generic, props: {title: 'About Page!'} },
+  { path: '/contact', component: Generic, props: {title: 'Contact Page!'} },
+  { path: '/signup', component: Generic, props: {title: 'Sign up Page!'} },
+  { path: '/login', component: Generic, props: {title: 'Log in Page!'} },
   { path: '/messages', component: Messages },
 ]
 
@@ -20,6 +24,7 @@ const router = createRouter({
   // 4. Provide the history implementation to use.
   history: createWebHistory(),
   routes, // short for `routes: routes`
+  linkActiveClass: 'is-active'
 })
 
 export default router;
