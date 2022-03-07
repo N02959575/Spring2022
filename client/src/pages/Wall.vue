@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue';
+import Messages from '../components/Messages.vue';
     const message = ref( 'Hello Vue!' );
     const currentTab = ref( 'All' );
     const prompt = ref( 'Waiting for input...' );
@@ -101,10 +102,7 @@ import { ref, reactive, onMounted } from 'vue';
                             </div>
                           </div>
 
-                        <div v-for=" (x, i) in notifications" :class="`notification is-${x.type}`">
-                            <button class="delete" @click="close(i)" ></button>
-                            {{ x.message }}
-                        </div>
+                        <Messages />
                         
                     </div>
                        

@@ -3,8 +3,12 @@
 import { Login } from '../models/session';
 
 
-function login(){
+function badlogin(){
     Login('Andres Mena', 'meme')
+}
+
+function login(){
+    Login('@joannadoe', 'password')
 }
 
 </script>
@@ -17,6 +21,13 @@ function login(){
                 <i class="fa fa-sign-in"></i>
             </span>
             <span>Login</span>
+        </button>
+        &nbsp;
+        <button class="button is-warning" @click="badlogin">
+            <span class="icon">
+                <i class="fa fa-sign-in"></i>
+            </span>
+            <span>Bad Login</span>
         </button>
     </div>
 </template>
