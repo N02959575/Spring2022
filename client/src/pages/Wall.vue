@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue';
-import Messages from '../components/Messages.vue';
     const message = ref( 'Hello Vue!' );
     const currentTab = ref( 'All' );
     const prompt = ref( 'Waiting for input...' );
@@ -102,7 +101,6 @@ import Messages from '../components/Messages.vue';
                             </div>
                           </div>
 
-                        <Messages />
                         
                     </div>
                        
