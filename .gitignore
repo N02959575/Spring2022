@@ -103,7 +103,7 @@ dist
 # public
 
 # vuepress build output
-#.vuepress/dist
+.vuepress/dist
 
 # vuepress v2.x temp and cache directory
 .temp
@@ -166,7 +166,7 @@ dist
 ### Vuejs ###
 # Recommended template: Node.gitignore
 
-dist/
+#####dist/
 npm-debug.log
 yarn-error.log
 
