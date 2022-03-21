@@ -1,0 +1,21 @@
+{
+  "name": "2022-spring",
+  "version": "1.0.0",
+  "description": "- HTML\r - CSS\r - Bulma\r - Vue 3\r - Node JS\r - Express\r - CI/CD",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --watch server server/index.js",
+    "start": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/N02959575/Spring2022.git"
+  },
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon":"^2.0.15"
+  }
+}
