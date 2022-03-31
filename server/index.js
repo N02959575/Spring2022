@@ -1,3 +1,6 @@
+
+require('dotenv').config();//load enviroment variables
+
 const express = require('express')
 const usersController = require('./controllers/users');
 
@@ -5,6 +8,7 @@ const usersController = require('./controllers/users');
 const app = express()
 const port = process.env.PORT || 3000;
 
+console.log(process.env);
 
 app
 
@@ -13,7 +17,7 @@ app
   .use(express.json())
 
   .get('/api/', (req, res) => {
-  res.send('You are on the homepage');
+  res.send('You are at the root of the API. For the best class ever - ' + process.env.BEST_CLASS_EVER);
   })
   .use('/api/users', usersController)
 
