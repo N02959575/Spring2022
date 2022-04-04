@@ -8,7 +8,6 @@ const usersController = require('./controllers/users');
 const app = express()
 const port = process.env.PORT || 3000;
 
-console.log(process.env);
 
 app
 
