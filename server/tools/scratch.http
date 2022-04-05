@@ -27,5 +27,14 @@ PATCH  http://localhost:3001/api/users/2
 Content-Type: application/json
 
 {
-  "lastName": "Mena III"
+  "password": "passwordtest"
+}
+
+###
+POST http://localhost:3001/api/users/login
+Content-Type: application/json
+
+{
+  "email": "Joanna@email.com",
+  "password": "passwordtest"
 }
