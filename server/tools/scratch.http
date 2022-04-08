@@ -38,3 +38,6 @@ Content-Type: application/json
   "email": "Joanna@email.com",
   "password": "passwordtest"
 }
+
+###
+POST http://localhost:3001/api/users/seed

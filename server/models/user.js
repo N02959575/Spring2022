@@ -1,5 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const {db, isConnected, ObjectId} = require('./mongo');
+
+const collection = db.db("taskList").collection("users");
 
 let highestId = 3;
 
@@ -32,15 +35,15 @@ const list = [{
 },
 ];
 
-function get(id){
-    return { ...list.find(user => user.id === parseInt(id)), password: undefined }
+async function get(id){
+    const user = await collection.findOne({ _id: new ObjectId(id) });
+    return { ...user, password: undefined }
 }
-function remove(id){
+
+async function remove(id){
     //... takes all properties and assigns them to outside object
-    const index = list.findIndex(user => user.id === parseInt(id));
-    const user = list.splice(index, 1);
-    
-    return {...user[0], password: undefined};
+    const user = await collection.findOneAndDelete({ _id: new ObjectId(id)});
+    return { ...user.value, password: undefined };
 }
 
 async function update(id, newUser){
@@ -58,7 +61,7 @@ async function update(id, newUser){
     return { ...newUser, password: undefined};
 }
 
-async function login(email, password){///////////////////
+async function login(email, password){
     const user = list.find(user => user.email === email);
     if(!user){
         throw { statusCode: 404, message: 'User not found' };
@@ -88,7 +91,13 @@ function fromToken(token){
     });
 }
 
+function seed(){
+    return collection.insertMany(list);
+}
+
 module.exports = {
+    collection,
+    seed,
     async create(user) {
         user.id = ++highestId;
         //the plus converts string to number
@@ -104,8 +113,8 @@ module.exports = {
     update,
     login,
     fromToken,
-    get list(){
-        return list.map(user => ({...user, password: undefined}));
+    async getlist(){
+        return (await collection.find().toArray()).map(user => ({...user, password: undefined}));
     },
 }
 
