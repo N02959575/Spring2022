@@ -32,10 +32,10 @@ app
             res.status(CREATED_STATUS).send(user);
         }).catch(next);
     })
-    .delete('/:id', requireAuth, (req,res) => {
+    .delete('/:id', requireAuth, (req,res,next) => {
         userModel.remove(req.params.id)
         .then(user => {
-            res.send({success: true, errors: [], data: x.insertedIds});
+            res.send({success: true, errors: [], data: user.insertedIds});
         }).catch(next);
     })
     .patch('/:id', (req, res, next) => {
