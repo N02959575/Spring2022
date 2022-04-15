@@ -7,7 +7,7 @@ const CREATED_STATUS = 201;
 
 app
     .get('/', (req, res, next) => {
-        postModel.getlist()
+        postModel.getList()
             .then(posts => res.json({ success: true, errors: [], data: posts }))
             .catch(next);
     })
