@@ -1,50 +1,47 @@
+import { defineStore } from 'pinia';
 import { useMessages } from './messages';
-import {reactive} from "vue";
 import router from "../router";
-
 import * as users from "../models/user";
+import { api } from './myFetch';
 
-const session =reactive({
-
+export const useSession = defineStore( 'session', {
+    state: () => ({
         user: null as users.User | null,
         destinationUrl: null as string | null,
+    }),
     
-}) 
-
-export async function Login(handle: string, password: string) {
-    const user = users.list.find(u => u.handle === handle);
-    const messages = useMessages();
-
-    try {
-
-        if(!user){
-            throw {message: "User not found"}
-        }
-        if(user.password !== password){
-            throw {message: "Incorrect password"}
-        }
-
-        messages.notifications.push({
-            type: "success",
-            message: `Welcome back ${user.firstName}`,
-        });
+    actions: {
+        async Login(email: string, password: string) {
     
-        session.user = user;
-        router.push(session.destinationUrl ?? '/wall')
+            const messages = useMessages();
         
-    } catch (error: any) {
+            try {
+                const user = await api("users/login", { email, password });
         
-        messages.notifications.push({
-            type: "danger",
-            message: error.message,
-        });
-    }
-    
-}
+                if(user) {
+        
+                    messages.notifications.push({
+                        type: "success",
+                        message: `Welcome back ${user.firstName}`,
+                    });
+                
+                    this.user = user;
+                    router.push(this.destinationUrl ?? '/wall');
+                }
+                
+            } catch (error: any) {
+                
+                messages.notifications.push({
+                    type: "danger",
+                    message: error.message,
+                });
+            }
+            
+        },
 
-export function Logout(){
-    session.user = null;
-    router.push('/login')
-}
-
-export default session;
+        Logout(){
+            this.user = null;
+            router.push('/login')
+        }
+    },
+})

@@ -4,7 +4,7 @@ import Home from '../pages/Home.vue';
 //import Messages from '../pages/Messages.vue';
 import Generic from '../pages/Generic.vue';
 import Login from '../pages/Login.vue';
-import session from "../models/session";
+import {useSession} from "../models/session";
 
 // 2. Define some routes
 // Each route should map to a component.
@@ -30,6 +30,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
+  const session = useSession();/////////////
     if(session.destinationUrl == null && to.path != '/login'){
       session.destinationUrl = to.path;
     }
