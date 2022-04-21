@@ -20,7 +20,8 @@ function login(){
             <div class="column is-half is-offset-one-quarter">
         
                 <div class="card">
-                    <div class="card-content" @submit.prevent = "login">
+                    
+                    <form class="card-content" @submit.prevent = "login">
                         <h1 class="title">Login Page</h1>
                         <div class="field">
                             <p class="control has-icons-left has-icons-right">
@@ -48,7 +49,7 @@ function login(){
                                 </button>
                             </p>
                         </div>
-                    </div>
+                    </form>
 
                 </div>
             </div>
