@@ -68,6 +68,10 @@ async function update(id, newPost){
     return includeUser(newPost);
 }
 
+function seed(){
+    return collection.insertMany(list);
+}
+
 module.exports = {
     async create(post) {
         post.id = ++hieghstId;
@@ -80,6 +84,7 @@ module.exports = {
     remove,
     update,
     getWall,
+    seed,
     async getList(){
         const posts = await collection.find({}).toArray();
 

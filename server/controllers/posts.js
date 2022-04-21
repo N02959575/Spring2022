@@ -11,6 +11,11 @@ app
             .then(posts => res.json({ success: true, errors: [], data: posts }))
             .catch(next);
     })
+    .get('/wall', (req, res,next) => {
+        postModel.getWall(req.user.handle)
+            .then(posts => res.json({ success: true, errors: [], data: posts }))
+            .catch(next);
+    })
     .get('/wall/:handle', (req, res,next) => {
         postModel.getWall(req.params.handle)
             .then(posts => res.json({ success: true, errors: [], data: posts }))
@@ -37,6 +42,12 @@ app
         postModel.update(req.params.id, req.body)
             .then(post => res.json({ success: true, errors: [], data: post }))
             .catch(next);
+    })
+    .post('/seed', (req, res, next) => {
+        postModel.seed()
+        .then(x => {
+            res.send({ success: true, errors: [], data: x.insertedIds });
+        }).catch(next);
     })
 
 
