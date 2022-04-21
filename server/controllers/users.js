@@ -38,8 +38,6 @@ app
         .then(user => {
             res.send({ success: true, errors: [], data: user });
         }).catch(next);
-        //const user = userModel.remove(req.params.id);
-        //res.send({ success: true, errors: [], data: user });
 
     })
     .patch('/:id', (req, res, next) => {
