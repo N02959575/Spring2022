@@ -17,7 +17,7 @@ export const useSession = defineStore( 'session', {
         
             try {
                 const user = await this.api("users/login", { email, password });
-        
+                console.log(user);
                 if(user) {
         
                     messages.notifications.push({
