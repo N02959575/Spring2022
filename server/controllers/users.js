@@ -3,40 +3,44 @@ const express = require('express');
 const app = express.Router();
 const { requireAuth } = require('../models/auth');
 
-const userModel = require('../models/user')
+const userModel = require('../models/user');
 
 const CREATED_STATUS = 201;
 
 app
-    .get('/', requireAuth, (req,res,next) => {
-        userModel.getlist()
+    .get('/', requireAuth, (req, res, next) => {
+        userModel.getList()
         .then(users => {
-            res.status({ success: true, errors: [], data: user });
-        }).catch(next)
+            res.send({ success: true, errors: [], data: users });
+        }).catch(next);
     })
-    .get('/handle/:handle', (req,res,next) =>{
+    .get('/handle/:handle', (req, res, next) => {
         userModel.getByHandle(req.params.handle)
         .then(user => {
-            res.status(200).json({ success: true, errors: [], data: user });
-        }).catch(next)
+            res.send({ success: true, errors: [], data: user });
+        }).catch(next);
     })
-    .get('/:id', (req,res,next) =>{
+    .get('/:id', (req, res, next) => {
         userModel.get(req.params.id)
         .then(user => {
-            res.status(200).json(user);
-        }).catch(next)
+            res.send({ success: true, errors: [], data: user });
+        }).catch(next);
     })
-    .post('/', (req,res,next) => {
+    .post('/', (req, res, next) => {
         userModel.create(req.body)
         .then(user => {
             res.status(CREATED_STATUS).send({ success: true, errors: [], data: user });
         }).catch(next);
     })
-    .delete('/:id', requireAuth, (req,res,next) => {
+    .delete('/:id', requireAuth, (req, res, next) => {
+
         userModel.remove(req.params.id)
         .then(user => {
-            res.send({success: true, errors: [], data: user.insertedIds});
+            res.send({ success: true, errors: [], data: user });
         }).catch(next);
+        //const user = userModel.remove(req.params.id);
+        //res.send({ success: true, errors: [], data: user });
+
     })
     .patch('/:id', (req, res, next) => {
 
@@ -44,18 +48,21 @@ app
         .then(user => {
             res.send({ success: true, errors: [], data: user });
         }).catch(next);
+
     })
-    .post('/login', (req,res,next) => {
+    .post('/login', (req, res, next) => {
         userModel.login(req.body.email, req.body.password)
         .then(user => {
             res.send({ success: true, errors: [], data: user });
         }).catch(next);
     })
-    .post('/seed', (req,res,next) => {
+    .post('/seed', (req, res, next) => {
         userModel.seed()
         .then(x => {
-            res.send({success: true, errors: [], data: x.insertedIds});
+            res.send({ success: true, errors: [], data: x.insertedIds });
         }).catch(next);
     })
+
+
 
 module.exports = app;
