@@ -17,6 +17,7 @@ app
             .catch(next);
     })
     .get('/wall/:handle', (req, res,next) => {
+        // if the user is not friends with the requested handle, then return an error
         postModel.getWall(req.params.handle)
             .then(posts => res.json({ success: true, errors: [], data: posts }))
             .catch(next);
@@ -27,6 +28,8 @@ app
             .catch(next);
     })
     .post('/', (req, res,next) => {
+        //the owner can only post to their own wall
+        req.body.owner = req.user.handle;///////////////
         postModel.create(req.body)
             .then(post => res.status(CREATED_STATUS).json({ success: true, errors: [], data: post }))
             .catch(next);
