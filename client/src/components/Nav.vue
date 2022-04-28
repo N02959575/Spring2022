@@ -29,6 +29,9 @@ import Messages from './Messages.vue';
                 <router-link class="navbar-item" to="/wall">
                   Wall
                 </router-link>
+                <router-link class="navbar-item" to="/weather">
+                  Weather
+                </router-link>
                 <div class="navbar-item has-dropdown is-hoverable">
                   <a class="navbar-link">
                     More
