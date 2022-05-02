@@ -2,15 +2,16 @@ http://localhost:3001
 
 ###
 GET http://localhost:3001/api/users
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKb2FubmEiLCJsYXN0TmFtZSI6IkRvZSIsImhhbmRsZSI6IkBqb2FubmFkb2UiLCJlbWFpbCI6IkpvYW5uYUBlbWFpbC5jb20iLCJwaWMiOiJodHRwczovL3JhbmRvbXVzZXIubWUvYXBpL3BvcnRyYWl0cy93b21lbi8yLmpwZyIsImlkIjoyLCJpYXQiOjE2NDkwOTg1NDd9.ZvLgeTWWJNYsUK_tOXMge77JB8HT9LX6Ajk_43pCWaM
+Authorization: bearer {{ login.response.body.data.token }}
 
 ###
 GET http://localhost:3001/api/users/handle/@joannadoe
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKb2FubmEiLCJsYXN0TmFtZSI6IkRvZSIsImhhbmRsZSI6IkBqb2FubmFkb2UiLCJlbWFpbCI6IkpvYW5uYUBlbWFpbC5jb20iLCJwaWMiOiJodHRwczovL3JhbmRvbXVzZXIubWUvYXBpL3BvcnRyYWl0cy93b21lbi8yLmpwZyIsImlkIjoyLCJpYXQiOjE2NDkwOTg1NDd9.ZvLgeTWWJNYsUK_tOXMge77JB8HT9LX6Ajk_43pCWaM
+Authorization: bearer {{ login.response.body.data.token }}
 
 ###
 GET http://localhost:3001/api/users/624f396095311be558d69ffc
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKb2FubmEiLCJsYXN0TmFtZSI6IkRvZSIsImhhbmRsZSI6IkBqb2FubmFkb2UiLCJlbWFpbCI6IkpvYW5uYUBlbWFpbC5jb20iLCJwaWMiOiJodHRwczovL3JhbmRvbXVzZXIubWUvYXBpL3BvcnRyYWl0cy93b21lbi8yLmpwZyIsImlkIjoyLCJpYXQiOjE2NDkwOTg1NDd9.ZvLgeTWWJNYsUK_tOXMge77JB8HT9LX6Ajk_43pCWaM
+Authorization: bearer {{ login.response.body.data.token }}
+
 ###
 DELETE  http://localhost:3001/api/users/1
 
@@ -35,14 +36,25 @@ Content-Type: application/json
   "password": "password"
 }
 
+
 ###
+# @name login 
 POST http://localhost:3001/api/users/login
 Content-Type: application/json
 
 {
   "email": "Joanna@email.com",
-  "password": "passwordtest"
+  "password": "password"
 }
 
 ###
 POST http://localhost:3001/api/users/seed
+
+###
+https://api.openweathermap.org/data/2.5/weather?q=New Paltz&appid={{$dotenv OPENWEATHER_KEY}}
+
+###
+https://api.coinbase.com/v2/exchange-rates
+
+###
+https://maps.googleapis.com/maps/api/place/textsearch/json?query=New+York&key={{$dotenv GOOGLE_API_KEY_1}}
